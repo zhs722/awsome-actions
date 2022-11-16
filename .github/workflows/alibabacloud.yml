@@ -4,6 +4,10 @@ name: tag image and push to aliacr
 on:
   workflow_dispatch:
     inputs:
+      region-id:
+        description: 'acr region'
+        default: 'cn-zhangjiakou'
+        required: true
       pull-image:
         description: 'Image to pull'
         default: 'wordpress:6-php8.1-fpm'
@@ -12,10 +16,6 @@ on:
         description: 'Image to push'
         default: 'registry.cn-zhangjiakou.aliyuncs.com/baidonghui_cr/wordpress:6-php8.1-fpm'
         required: true
-        
-# Environment variables available to all jobs and steps in this workflow.
-env:
-  REGION_ID: cn-zhangjiakou
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
     - name: Login to ACR with the AccessKey pair
       uses: aliyun/acr-login@v1
       with:
-        region-id: "${{ env.REGION_ID }}"
+        region-id: "${{ github.event.inputs.region-id }}"
         access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
         access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
 
