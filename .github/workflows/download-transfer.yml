@@ -1,4 +1,4 @@
-name: tag image and push to aliacr
+name: download file and transfer to oss
 
 on:
   workflow_dispatch:
