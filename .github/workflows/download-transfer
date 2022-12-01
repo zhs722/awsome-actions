@@ -1,0 +1,28 @@
+name: tag image and push to aliacr
+
+on:
+  workflow_dispatch:
+    inputs:
+      download-url:
+        description: '下载地址'
+        default: 'https://github.com/Fndroid/clash_for_windows_pkg/releases/download/0.20.9/Clash.for.Windows-0.20.9-win.7z'
+        required: true
+      filename:
+        description: '文件名'
+        default: 'Clash.for.Windows-0.20.9-win.7z'
+        required: true
+      oss-bucket:
+        description: 'OSS BUCKET地址'
+        default: 'xxxxx.oss-cn-beijing.aliyuncs.com'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: download and transfer
+      run: |
+        wget ${{ github.event.inputs.download-url }} -O /tmp/${{ github.event.inputs.filename }}
+        curl -X PUT --data /tmp/${{ github.event.inputs.filename }} https://${{ github.event.inputs.oss-bucket }}/${{ github.event.inputs.filename }}
