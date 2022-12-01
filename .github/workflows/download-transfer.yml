@@ -22,7 +22,9 @@ jobs:
     environment: production
 
     steps:
-    - name: download and transfer
+    - name: download
       run: |
         wget ${{ github.event.inputs.download-url }} -O /tmp/${{ github.event.inputs.filename }}
+    - name: transfer
+      run: |
         curl -X PUT --data "@/tmp/${{ github.event.inputs.filename }}" https://${{ github.event.inputs.oss-bucket }}/${{ github.event.inputs.filename }}
