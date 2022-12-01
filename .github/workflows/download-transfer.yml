@@ -25,6 +25,8 @@ jobs:
     - name: download
       run: |
         wget ${{ github.event.inputs.download-url }} -O /tmp/${{ github.event.inputs.filename }}
+        ll -h /tmp/
     - name: transfer
       run: |
+        ll -h /tmp/
         curl -X PUT --data "@/tmp/${{ github.event.inputs.filename }}" https://${{ github.event.inputs.oss-bucket }}/${{ github.event.inputs.filename }}
