@@ -29,4 +29,4 @@ jobs:
     - name: transfer
       run: |
         ls -lh /tmp/
-        curl -X PUT --data "@/tmp/${{ github.event.inputs.filename }}" https://${{ github.event.inputs.oss-bucket }}/${{ github.event.inputs.filename }}
+        curl -X PUT -T "/tmp/${{ github.event.inputs.filename }}" https://${{ github.event.inputs.oss-bucket }}/${{ github.event.inputs.filename }}
