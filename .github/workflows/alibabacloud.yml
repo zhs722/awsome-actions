@@ -14,7 +14,7 @@ on:
         required: true
       push-image:
         description: 'Image to push'
-        default: 'registry.cn-zhangjiakou.aliyuncs.com/zhs_k8s/wordpress:6-php8.1-fpm'
+        default: 'registry.cn-hangzhou.aliyuncs.com/zhs_k8s/wordpress:6-php8.1-fpm'
         required: true
 
 jobs:
